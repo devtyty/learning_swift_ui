@@ -1,24 +1,24 @@
-//
-//  ContentView.swift
-//  LearnSwiftUI
-//
-//  Created by MEGABEE on 12/7/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selectedCourse: CourseItem?
+
+    private let courses: [CourseItem] = [
+        CourseItem(label: "Hello, world!", destination: AnyView(HelloWorldScreen())),
+        CourseItem(label: "Animation Morphing View", destination: AnyView(MorphingView())),
+    ]
+
     var body: some View {
-        NavigationSplitView {
-            List {
-                NavigationLink {
-                    HelloWorldScreen()
-                } label: {
-                    CourseRow(label: "Hello, world!")
+        NavigationStack {
+            List(courses) { course in
+                NavigationLink(value: course) {
+                    CourseRow(label: course.label)
                 }
-            }.navigationTitle("Courses")
-        } detail: {
-            Text("Select a course!")
+            }
+            .navigationDestination(for: CourseItem.self) { course in
+                course.destination
+            }
+            .navigationTitle("Courses")
         }
     }
 }
