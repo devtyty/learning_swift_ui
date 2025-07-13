@@ -9,10 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
+        NavigationSplitView {
             List {
-                CourseRow(label: "Hello, world!")
-            }
+                NavigationLink {
+                    HelloWorldScreen()
+                } label: {
+                    CourseRow(label: "Hello, world!")
+                }
+            }.navigationTitle("Courses")
+        } detail: {
+            Text("Select a course!")
         }
     }
 }
