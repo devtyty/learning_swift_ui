@@ -6,6 +6,7 @@ struct ContentView: View {
     private let courses: [CourseItem] = [
         CourseItem(label: "Hello, world!", destination: AnyView(HelloWorldScreen())),
         CourseItem(label: "Animation Morphing View", destination: AnyView(MorphingView())),
+        CourseItem(label: "Use Stacks Arrange Views", destination: AnyView(StackArrangeViews())),
     ]
 
     var body: some View {
