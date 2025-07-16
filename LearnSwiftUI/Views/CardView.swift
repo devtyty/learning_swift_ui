@@ -12,7 +12,7 @@ struct CardView: View {
                 Label("\(scrum.attendees.count)", systemImage: "person.3")
                 Label("\(scrum.lengthInMinutes)", systemImage: "clock")
             }.font(.caption)
-        }.padding().foregroundColor(.accentColor)
+        }.padding().foregroundColor(scrum.theme.accentColor)
     }
 }
 
