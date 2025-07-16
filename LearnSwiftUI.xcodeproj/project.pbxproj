@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F643A8E22E27925D0083E21F /* ThemeKit in Frameworks */ = {isa = PBXBuildFile; productRef = F643A8E12E27925D0083E21F /* ThemeKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		F63A837D2E2288C900D4C6F6 /* LearnSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F643A8E22E27925D0083E21F /* ThemeKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = LearnSwiftUI;
 			packageProductDependencies = (
+				F643A8E12E27925D0083E21F /* ThemeKit */,
 			);
 			productName = LearnSwiftUI;
 			productReference = F63A837D2E2288C900D4C6F6 /* LearnSwiftUI.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = F63A83742E2288C900D4C6F6;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F643A8E02E27925D0083E21F /* XCLocalSwiftPackageReference "ThemeKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F63A837E2E2288C900D4C6F6 /* Products */;
 			projectDirPath = "";
@@ -258,7 +267,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -286,7 +295,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -322,6 +331,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		F643A8E02E27925D0083E21F /* XCLocalSwiftPackageReference "ThemeKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ThemeKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F643A8E12E27925D0083E21F /* ThemeKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ThemeKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F63A83752E2288C900D4C6F6 /* Project object */;
 }
