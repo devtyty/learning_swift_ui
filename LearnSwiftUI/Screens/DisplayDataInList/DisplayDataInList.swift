@@ -10,15 +10,17 @@ import ThemeKit
 
 struct DisplayDataInList: View {
     let scrums: [DailyScrum]
-    
+
     var body: some View {
-        Text("Hello!")
-        List(scrums, id: \.title) { scrum in
-            CardView(scrum: scrum).listRowBackground(scrum.theme.mainColor)
+        NavigationStack {
+            List(scrums, id: \.title) { scrum in
+                NavigationLink(destination: DetailView(scrum: scrum)) {
+                    CardView(scrum: scrum)
+                }.listRowBackground(scrum.theme.mainColor)
+            }.navigationTitle("Daily Scrums")
         }
     }
 }
-
 
 #Preview {
     DisplayDataInList(scrums: DailyScrum.sampleData)
