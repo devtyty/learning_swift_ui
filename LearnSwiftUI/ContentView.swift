@@ -8,6 +8,7 @@ struct ContentView: View {
         CourseItem(label: "Animation Morphing View", destination: AnyView(MorphingView())),
         CourseItem(label: "Use Stacks Arrange Views", destination: AnyView(StackArrangeViews())),
         CourseItem(label: "Display Data In List", destination: AnyView(DisplayDataInList(scrums: DailyScrum.sampleData))),
+        CourseItem(label: "Create Edit View (State)", destination: AnyView(DetailEditView()))
     ]
     
     var body: some View {
