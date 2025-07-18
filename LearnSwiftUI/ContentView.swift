@@ -25,6 +25,7 @@ enum CourseType: CaseIterable, Identifiable {
 struct ContentView: View {
     @State private var selectedCourse: CourseItem?
     @State private var scrums = DailyScrum.sampleData
+    @State private var scrum = DailyScrum.emptyScrum
 
     @ViewBuilder
     private func destination(for type: CourseType) -> some View {
@@ -34,7 +35,7 @@ struct ContentView: View {
         case .animationMorphingView:
             AnyView(MorphingView())
         case .stackArrangeViews:
-            AnyView(StackArrangeViews())
+            AnyView(StackArrangeViews(scrum: $scrum))
         case .displayDataInList:
             AnyView(DisplayDataInList(scrums: $scrums))
         }

@@ -8,41 +8,40 @@
 import SwiftUI
 
 struct StackArrangeViews: View {
+    @Binding var scrum: DailyScrum
+
     var body: some View {
-        MeetingView()
+        MeetingView(scrum: $scrum)
     }
 }
 
 private struct MeetingView: View {
-    var body: some View {
-        VStack {
-            ProgressView(value: 0.4, total: 1)
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Second Elasped").font(.caption)
-                    Label("300", systemImage: "hourglass.tophalf.fill")
-                }
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text("Second Elasped").font(.caption)
-                    Label("600", systemImage: "hourglass.tophalf.fill")
-                }
-            }
-            Circle().strokeBorder(lineWidth: 20)
-            HStack {
-                Text("Speaker 1 of 3")
-                Spacer()
-                Button(action: {}) {
-                    Image(systemName: "forward.fill")
-                }
-            }
-        }.padding(.horizontal, 16)
+    @Binding var scrum: DailyScrum
 
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 16).fill(scrum.theme.mainColor)
+            VStack {
+                MeetingHeaderView(secondsEslaped: 30, secondsRemaining: 30)
+                Circle().strokeBorder(lineWidth: 20)
+                HStack {
+                    Text("Speaker 1 of 3")
+                    Spacer()
+                    Button(action: {}) {
+                        Image(systemName: "forward.fill")
+                    }
+                }
+            }
+        }.padding()
+            .foregroundColor(scrum.theme.accentColor)
+            .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    StackArrangeViews()
+    @Previewable @State var scrum: DailyScrum = .emptyScrum
+
+    StackArrangeViews(scrum: $scrum)
 }
 
 extension Text {
