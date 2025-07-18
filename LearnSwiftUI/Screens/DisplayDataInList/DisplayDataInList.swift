@@ -9,12 +9,12 @@ import SwiftUI
 import ThemeKit
 
 struct DisplayDataInList: View {
-    let scrums: [DailyScrum]
+    @Binding var scrums: [DailyScrum]
 
     var body: some View {
         NavigationStack {
-            List(scrums, id: \.title) { scrum in
-                NavigationLink(destination: DetailView(scrum: scrum)) {
+            List($scrums, id: \.title) { $scrum in
+                NavigationLink(destination: DetailView(scrum: $scrum)) {
                     CardView(scrum: scrum)
                 }.listRowBackground(scrum.theme.mainColor)
             }.navigationTitle("Daily Scrums")
@@ -23,5 +23,8 @@ struct DisplayDataInList: View {
 }
 
 #Preview {
-    DisplayDataInList(scrums: DailyScrum.sampleData)
+    
+    @Previewable @State var scrums = DailyScrum.sampleData
+    
+    DisplayDataInList(scrums: $scrums)
 }
