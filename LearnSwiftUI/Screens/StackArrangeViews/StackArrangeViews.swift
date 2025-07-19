@@ -22,7 +22,11 @@ private struct MeetingView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 16).fill(scrum.theme.mainColor)
             VStack {
-                MeetingHeaderView(secondsEslaped: 30, secondsRemaining: 30)
+                MeetingHeaderView(
+                    secondsEslaped: 30,
+                    secondsRemaining: 30,
+                    theme: scrum.theme
+                )
                 Circle().strokeBorder(lineWidth: 20)
                 HStack {
                     Text("Speaker 1 of 3")

@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import ThemeKit
+import TimerKit
 
 struct MeetingHeaderView: View {
     let secondsEslaped: Int
     let secondsRemaining: Int
+    let theme: Theme
 
     private var totalSeconds: Int {
         secondsEslaped + secondsRemaining
@@ -20,7 +23,7 @@ struct MeetingHeaderView: View {
 
         return Double(secondsEslaped) / Double(totalSeconds)
     }
-    
+
     private var minutesRemaining: Int {
         totalSeconds / 60
     }
@@ -28,6 +31,7 @@ struct MeetingHeaderView: View {
     var body: some View {
         VStack {
             ProgressView(value: 5, total: 15)
+                .progressViewStyle(ScrumProgressViewStyle(theme: theme))
             HStack {
                 VStack(alignment: .leading) {
                     Text("Second Elasped").font(.caption)
@@ -53,5 +57,9 @@ struct MeetingHeaderView: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    MeetingHeaderView(secondsEslaped: 60, secondsRemaining: 180)
+    MeetingHeaderView(
+        secondsEslaped: 60,
+        secondsRemaining: 180,
+        theme: .bubblegum
+    )
 }

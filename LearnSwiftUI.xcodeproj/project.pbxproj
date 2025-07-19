@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F643A8E22E27925D0083E21F /* ThemeKit in Frameworks */ = {isa = PBXBuildFile; productRef = F643A8E12E27925D0083E21F /* ThemeKit */; };
+		F643A8FD2E2BEC8E0083E21F /* TimerKit in Frameworks */ = {isa = PBXBuildFile; productRef = F643A8FC2E2BEC8E0083E21F /* TimerKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F643A8E22E27925D0083E21F /* ThemeKit in Frameworks */,
+				F643A8FD2E2BEC8E0083E21F /* TimerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 			name = LearnSwiftUI;
 			packageProductDependencies = (
 				F643A8E12E27925D0083E21F /* ThemeKit */,
+				F643A8FC2E2BEC8E0083E21F /* TimerKit */,
 			);
 			productName = LearnSwiftUI;
 			productReference = F63A837D2E2288C900D4C6F6 /* LearnSwiftUI.app */;
@@ -102,6 +105,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				F643A8E02E27925D0083E21F /* XCLocalSwiftPackageReference "ThemeKit" */,
+				F643A8FE2E2BFF050083E21F /* XCLocalSwiftPackageReference "TimerKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F63A837E2E2288C900D4C6F6 /* Products */;
@@ -337,12 +341,20 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ThemeKit;
 		};
+		F643A8FE2E2BFF050083E21F /* XCLocalSwiftPackageReference "TimerKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = TimerKit;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		F643A8E12E27925D0083E21F /* ThemeKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ThemeKit;
+		};
+		F643A8FC2E2BEC8E0083E21F /* TimerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TimerKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
