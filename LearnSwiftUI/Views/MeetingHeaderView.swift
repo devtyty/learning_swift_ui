@@ -45,14 +45,15 @@ struct MeetingHeaderView: View {
                     Text("Second Elasped").font(.caption)
                     Label(
                         "\(secondsRemaining)",
-                        systemImage: "hourglass.tophalf.fill"
+                        systemImage: "hourglass.bottomhalf.fill"
                     )
                 }
             }
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Time remaining")
-        .accessibilityValue("10 minutes")
+        .accessibilityValue("\(minutesRemaining) minutes")
+        .padding([.top, .horizontal])
     }
 }
 
