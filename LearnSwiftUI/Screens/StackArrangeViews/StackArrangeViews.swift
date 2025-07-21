@@ -5,13 +5,13 @@
 //  Created by MEGABEE on 13/7/25.
 //
 
+import AVFoundation
 import SwiftUI
 import TimerKit
-import AVFoundation
 
 struct StackArrangeViews: View {
     @Binding var scrum: DailyScrum
-    
+
     var body: some View {
         MeetingView(scrum: $scrum)
     }
@@ -20,9 +20,9 @@ struct StackArrangeViews: View {
 private struct MeetingView: View {
     @Binding var scrum: DailyScrum
     @State var scrumTier = ScrumTimer()
-    
+
     private let player = AVPlayer.dingPlayer()
-    
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16).fill(scrum.theme.mainColor)
@@ -41,25 +41,35 @@ private struct MeetingView: View {
         }.padding()
             .foregroundColor(scrum.theme.accentColor)
             .onAppear {
-                scrumTier.reset(
-                    lengthInMinutes: scrum.lengthInMinutes,
-                    attendeeNames: scrum.attendees.map({ $0.name })
-                )
-                scrumTier.startScrum()
-                scrumTier.speakerChangedAction = {
-                    player.seek(to: .zero)
-                    player.play()
-                }
+                startScrum()
             }
             .onDisappear {
-                scrumTier.stopScrum()
+                endScrum()
             }
             .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private func startScrum() {
+        scrumTier.reset(
+            lengthInMinutes: scrum.lengthInMinutes,
+            attendeeNames: scrum.attendees.map({ $0.name })
+        )
+        scrumTier.startScrum()
+        scrumTier.speakerChangedAction = {
+            player.seek(to: .zero)
+            player.play()
+        }
+    }
+
+    private func endScrum() {
+        scrumTier.stopScrum()
+        let newHistory = History(attendees: scrum.attendees)
+        scrum.history.insert(newHistory, at: 0)
     }
 }
 
 #Preview {
     @Previewable @State var scrum: DailyScrum = .emptyScrum
-    
+
     StackArrangeViews(scrum: $scrum)
 }

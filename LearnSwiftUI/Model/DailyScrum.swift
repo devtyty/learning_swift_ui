@@ -23,6 +23,7 @@ struct DailyScrum: Identifiable {
         }
     }
     var theme: Theme
+    var history: [History] = []
     
     init(id: UUID = UUID(), title: String, attendees: [String], lengthInMinutes: Int, theme: Theme) {
         self.id = id
@@ -47,6 +48,6 @@ extension DailyScrum {
     }
     
     static var emptyScrum: DailyScrum {
-        DailyScrum(title: "", attendees: [], lengthInMinutes: 0, theme: .sky)
+        DailyScrum(title: "", attendees: [], lengthInMinutes: 1, theme: .sky)
     }
 }
