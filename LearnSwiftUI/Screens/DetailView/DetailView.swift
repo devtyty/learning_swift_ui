@@ -6,18 +6,19 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct DetailView: View {
-    @Binding var scrum: DailyScrum
+    let scrum: DailyScrum
 
     @State private var editingScrum: DailyScrum = .emptyScrum
 
     @State private var isPresentingEditView = false
-    
+
     var body: some View {
         List {
             Section(header: Text("Meeting Info")) {
-                NavigationLink(destination: StackArrangeViews(scrum: $scrum)) {
+                NavigationLink(destination: StackArrangeViews(scrum: scrum)) {
                     Label("Start Meeting", systemImage: "timer").font(.headline)
                         .foregroundColor(.accentColor)
                 }
@@ -45,9 +46,12 @@ struct DetailView: View {
             }
             Section(header: Text("History")) {
                 if scrum.history.isEmpty {
-                    Label("No meetings yet", systemImage: "calendar.badge.exclamationmark")
+                    Label(
+                        "No meetings yet",
+                        systemImage: "calendar.badge.exclamationmark"
+                    )
                 }
-                
+
                 ForEach(scrum.history) { history in
                     HStack {
                         Image(systemName: "calendar")
@@ -64,10 +68,7 @@ struct DetailView: View {
             .sheet(isPresented: $isPresentingEditView) {
                 NavigationStack {
                     DetailEditView(
-                        scrum: $editingScrum,
-                        saveEdits: { _ in
-                            scrum = editingScrum
-                        }
+                        scrum: scrum
                     )
                     .navigationTitle(
                         scrum.title
@@ -77,10 +78,10 @@ struct DetailView: View {
     }
 }
 
-#Preview {
-    @Previewable @State var scrum: DailyScrum = .sampleData[0]
+#Preview(traits: .dailyScrumsSampleData) {
+    @Previewable @Query(sort: \DailyScrum.title) var scrums: [DailyScrum]
 
     NavigationStack {
-        DetailView(scrum: $scrum)
+        DetailView(scrum: scrums[0])
     }
 }

@@ -93,5 +93,5 @@ struct MorphingButton<Label: View, Content: View, ExpandedContent: View>: View {
 }
 
 #Preview {
-    ContentView()
+    ScrumdingerApp()
 }

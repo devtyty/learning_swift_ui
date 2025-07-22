@@ -71,5 +71,5 @@ struct MorphingView: View {
 }
 
 #Preview {
-    ContentView()
+    ScrumdingerApp()
 }

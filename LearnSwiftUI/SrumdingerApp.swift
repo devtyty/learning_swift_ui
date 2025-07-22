@@ -17,12 +17,12 @@ enum CourseType: CaseIterable, Identifiable {
         case .stackArrangeViews:
             return "Use Stacks Arrange Views"
         case .displayDataInList:
-            return "Display Data In List"
+            return "ScrumViews"
         }
     }
 }
 
-struct ContentView: View {
+struct ScrumdingerApp: View {
     @State private var selectedCourse: CourseItem?
     @State private var scrums = DailyScrum.sampleData
     @State private var scrum = DailyScrum.emptyScrum
@@ -35,9 +35,9 @@ struct ContentView: View {
         case .animationMorphingView:
             AnyView(MorphingView())
         case .stackArrangeViews:
-            AnyView(StackArrangeViews(scrum: $scrum))
+            AnyView(StackArrangeViews(scrum: scrum))
         case .displayDataInList:
-            AnyView(DisplayDataInList(scrums: $scrums))
+            AnyView(ScrumViews())
         }
     }
 
@@ -54,5 +54,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ScrumdingerApp()
 }

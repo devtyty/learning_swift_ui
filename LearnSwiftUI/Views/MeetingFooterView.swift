@@ -5,6 +5,7 @@
 //  Created by Megabee on 21/7/25.
 //
 
+import SwiftData
 import SwiftUI
 import TimerKit
 
@@ -49,8 +50,10 @@ struct MeetingFooterView: View {
     }
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
-    @Previewable var speakers = DailyScrum.sampleData.first!.attendees.map {
+#Preview(traits: .dailyScrumsSampleData) {
+    @Previewable @Query(sort: \DailyScrum.title) var dailyScrums: [DailyScrum]
+
+    var speakers = dailyScrums.first!.attendees.map {
         $0.name
     }
     .map { ScrumTimer.Speaker(name: $0, isCompleted: false) }

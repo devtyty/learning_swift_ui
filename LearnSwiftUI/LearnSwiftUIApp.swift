@@ -11,7 +11,7 @@ import SwiftUI
 struct LearnSwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
-        }
+            ScrumdingerApp()
+        }.modelContainer(for: DailyScrum.self)
     }
 }
