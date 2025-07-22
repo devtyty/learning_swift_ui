@@ -9,19 +9,12 @@ import AVFoundation
 import SwiftUI
 import TimerKit
 
-struct StackArrangeViews: View {
+struct MeetingView: View {
     let scrum: DailyScrum
 
-    var body: some View {
-        MeetingView(scrum: scrum)
-    }
-}
-
-private struct MeetingView: View {
     @Environment(\.modelContext) private var context
-    
-    let scrum: DailyScrum
     @State var scrumTier = ScrumTimer()
+    @Binding var errorWrapper: ErrorWrapper?
 
     private let player = AVPlayer.dingPlayer()
 
@@ -46,7 +39,15 @@ private struct MeetingView: View {
                 startScrum()
             }
             .onDisappear {
-                endScrum()
+                do {
+                    try endScrum()
+                } catch {
+                    errorWrapper = ErrorWrapper(
+                        error: error,
+                        guidance:
+                            "Meeting time was not recorded. Try again later."
+                    )
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
     }
@@ -63,16 +64,16 @@ private struct MeetingView: View {
         }
     }
 
-    private func endScrum() {
+    private func endScrum() throws {
         scrumTier.stopScrum()
         let newHistory = History(attendees: scrum.attendees)
         scrum.history.insert(newHistory, at: 0)
-        try? context.save()
+        try context.save()
     }
 }
 
 #Preview {
     @Previewable @State var scrum: DailyScrum = .emptyScrum
 
-    StackArrangeViews(scrum: scrum)
+    MeetingView(scrum: scrum, errorWrapper: .constant(nil))
 }

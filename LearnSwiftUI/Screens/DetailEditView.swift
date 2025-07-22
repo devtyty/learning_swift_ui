@@ -5,9 +5,9 @@
 //  Created by MEGABEE on 17/7/25.
 //
 
+import SwiftData
 import SwiftUI
 import ThemeKit
-import SwiftData
 
 struct DetailEditView: View {
     let scrum: DailyScrum
@@ -17,22 +17,27 @@ struct DetailEditView: View {
     @State private var lengthInMinutesAsDouble: Double
     @State private var attendees: [Attendee]
     @State private var theme: Theme
-    
+    @State private var errorWrapper: ErrorWrapper?
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
 
     private var isCreatingScrum: Bool = false
-    
+
     init(scrum: DailyScrum?) {
         let scrumToEdit: DailyScrum
         if let scrum {
             scrumToEdit = scrum
             isCreatingScrum = false
         } else {
-            scrumToEdit = DailyScrum(title: "", attendees: [], lengthInMinutes: 5, theme: .sky)
+            scrumToEdit = DailyScrum(
+                title: "",
+                attendees: [],
+                lengthInMinutes: 5,
+                theme: .sky
+            )
             isCreatingScrum = true
         }
-
 
         self.scrum = scrumToEdit
         self.title = scrumToEdit.title
@@ -54,7 +59,7 @@ struct DetailEditView: View {
                         Text("Length")
                     }
                     Spacer()
-                    Text("\(lengthInMinutesAsDouble) minutes")
+                    Text("\(Int(lengthInMinutesAsDouble)) minutes")
                 }
                 ThemePicker(selection: $theme)
             }
@@ -89,26 +94,37 @@ struct DetailEditView: View {
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button("Done") {
-                    saveEdits()
-                    dismiss()
+                    do {
+                        try saveEdits()
+                        dismiss()
+                    } catch {
+                        errorWrapper = ErrorWrapper(
+                            error: error,
+                            guidance:
+                                "Daily scrum was not recorded. Try again later"
+                        )
+                    }
                 }
             }
         }
+        .sheet(item: $errorWrapper) {
+            dismiss()
+        } content: { wrapper in
+            ErrorView(errorWrapper: wrapper)
+        }
     }
-    
-    private func saveEdits() {
+
+    private func saveEdits() throws {
         scrum.title = title
         scrum.lengthInMinitesAsDouble = lengthInMinutesAsDouble
         scrum.attendees = attendees
         scrum.theme = theme
 
-
         if isCreatingScrum {
             context.insert(scrum)
         }
 
-
-        try? context.save()
+        try context.save()
     }
 }
 

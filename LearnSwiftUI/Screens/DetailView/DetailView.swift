@@ -5,8 +5,8 @@
 //  Created by MEGABEE on 17/7/25.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct DetailView: View {
     let scrum: DailyScrum
@@ -14,11 +14,17 @@ struct DetailView: View {
     @State private var editingScrum: DailyScrum = .emptyScrum
 
     @State private var isPresentingEditView = false
+    @State private var errorWrapper: ErrorWrapper?
 
     var body: some View {
         List {
             Section(header: Text("Meeting Info")) {
-                NavigationLink(destination: StackArrangeViews(scrum: scrum)) {
+                NavigationLink(
+                    destination: MeetingView(
+                        scrum: scrum,
+                        errorWrapper: $errorWrapper
+                    )
+                ) {
                     Label("Start Meeting", systemImage: "timer").font(.headline)
                         .foregroundColor(.accentColor)
                 }
@@ -74,6 +80,9 @@ struct DetailView: View {
                         scrum.title
                     )
                 }
+            }
+            .sheet(item: $errorWrapper, onDismiss: nil) { wrapper in
+                ErrorView(errorWrapper: wrapper)
             }
     }
 }

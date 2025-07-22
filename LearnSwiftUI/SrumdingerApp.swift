@@ -15,7 +15,7 @@ enum CourseType: CaseIterable, Identifiable {
         case .animationMorphingView:
             return "Animation Morphing View"
         case .stackArrangeViews:
-            return "Use Stacks Arrange Views"
+            return "Meeting View"
         case .displayDataInList:
             return "ScrumViews"
         }
@@ -35,7 +35,7 @@ struct ScrumdingerApp: View {
         case .animationMorphingView:
             AnyView(MorphingView())
         case .stackArrangeViews:
-            AnyView(StackArrangeViews(scrum: scrum))
+            AnyView(MeetingView(scrum: scrum, errorWrapper: .constant(nil)))
         case .displayDataInList:
             AnyView(ScrumViews())
         }
