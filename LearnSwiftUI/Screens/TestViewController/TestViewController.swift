@@ -29,7 +29,9 @@ final class TestViewController: UIViewController {
         view.addSubview(label)
         
         setupViews()
-        testMethod()
+        //testMethod()
+        testSwizzling()
+        addTestButton()
     }
     
     // MARK: - SetupsView
@@ -68,5 +70,30 @@ final class TestViewController: UIViewController {
     func makeStruct() -> () -> MyStruct {
         var s = MyStruct()
         return { s } // s capture => heap
+    }
+    
+    func testSwizzling() {
+        let color = UIColor.blue
+        print("description: \(color)")
+        print("hexDescription: \(color.hexDescription())")
+        color.swizzleDesription()
+        print("description: \(color)")
+        print("hexDescription: \(color.hexDescription())")
+        _ = UIButton.swizzleSendAction
+    }
+    
+    private func addTestButton() {
+        let button = UIButton(type: .system)
+        button.setTitle("Tap Me 32423", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .systemPink
+        button.layer.cornerRadius = 8
+        button.frame = CGRect(x: 100, y: 300, width: 150, height: 50)
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        view.addSubview(button)
+    }
+
+    @objc private func buttonTapped() {
+        print("🎯 Original buttonTapped() called")
     }
 }
