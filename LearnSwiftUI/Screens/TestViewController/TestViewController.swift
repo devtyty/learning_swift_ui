@@ -38,6 +38,35 @@ final class TestViewController: UIViewController {
     }
     
     private func testMethod() {
+        let object = MyClass()
+        print("class addr:", Unmanaged.passUnretained(object).toOpaque())
         
+        var s = MyStruct()
+        withUnsafePointer(to: &s) { ptr in
+            print("struct addr before capture:", ptr)
+        }
+        
+        let closure = makeStruct()
+        var s1 = closure()
+        withUnsafePointer(to: &s1) { ptr in
+            print("struct addr after capture:", ptr)
+        }
+    }
+    
+    // MARK: - Test heap & stack storage
+    class MyClass {
+        var value = 123
+    }
+    
+    struct MyStruct {
+        var a = 10
+        var b = 20
+        
+        var arr = Array(repeating: 1, count: 1_000_000)
+    }
+    
+    func makeStruct() -> () -> MyStruct {
+        var s = MyStruct()
+        return { s } // s capture => heap
     }
 }
