@@ -5,6 +5,7 @@ enum CourseType: CaseIterable, Identifiable {
     case animationMorphingView
     case stackArrangeViews
     case displayDataInList
+    case testViewController
 
     var id: Self { self }
 
@@ -18,6 +19,8 @@ enum CourseType: CaseIterable, Identifiable {
             return "Meeting View"
         case .displayDataInList:
             return "ScrumViews"
+        case .testViewController:
+            return "TestViewController"
         }
     }
 }
@@ -38,6 +41,8 @@ struct ScrumdingerApp: View {
             AnyView(MeetingView(scrum: scrum, errorWrapper: .constant(nil)))
         case .displayDataInList:
             AnyView(ScrumViews())
+        case .testViewController:
+            AnyView(TestViewControllerWrapper())
         }
     }
 
